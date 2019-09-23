@@ -1,0 +1,15 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{selectedProduct.productName}}</ion-title>
+    <!-- <ion-buttons slot="end">
+      <ion-icon name="trash" (click)="onClickTrash()"></ion-icon>
+    </ion-buttons> -->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-img [src]="selectedProduct.imageUrl" style="width: 80px; height: 80px;"></ion-img>
+</ion-content>
