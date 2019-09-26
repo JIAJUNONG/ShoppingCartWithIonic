@@ -1,8 +1,28 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Home Page
+      Shopping Cart: Summary
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
+<ion-content padding style="display: flex; align-items: center; height:100%">
+  <ion-grid style="width: 100%;position:absolute; top: 50%; transform: translateY(-50%)">
+    <ion-row>
+      <ion-col>
+        <h4>Number of Items</h4>
+      </ion-col>
+      <ion-col>
+        <h4>{{products.length}}</h4>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <h3>Total Price</h3>
+      </ion-col>
+      <ion-col>
+        <h3>RM {{sum()}}</h3>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

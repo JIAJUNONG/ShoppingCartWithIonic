@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { ShoppingService } from '../shopping.service';
-import { NavController } from '@ionic/angular';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-product-list-details',
@@ -9,15 +8,18 @@ import { NavController } from '@ionic/angular';
   styleUrls: ['./product-list-details.page.scss'],
 })
 export class ProductListDetailsPage implements OnInit {
-  selectedProduct = null;
+  selectedProduct = null
 
-  constructor(private shoppingService: ShoppingService, private route: ActivatedRoute, private navCtrl: NavController) { }
+  constructor(private ShoppingService: ShoppingService, private route: ActivatedRoute ) { }
 
   ngOnInit() {
-    let productId = this.route.snapshot.paramMap.get("productId");
-    this.selectedProduct = this.shoppingService.productlist.getValue().filter(product => {
-      return product.id === parseInt(productId)
-    })[0]
+    const productId = this.route.snapshot.params.productId
+    this.ShoppingService.products.subscribe(products => {
+      this.selectedProduct = products.filter(p => {
+        return p.id === parseInt(productId)
+      })[0]
+    })
+
   }
 
 }

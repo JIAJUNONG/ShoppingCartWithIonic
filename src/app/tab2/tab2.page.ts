@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ShoppingService } from '../shopping.service';
-import { ActionSheetController, NavController } from '@ionic/angular';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab2',
@@ -8,35 +8,35 @@ import { ActionSheetController, NavController } from '@ionic/angular';
   styleUrls: ['tab2.page.scss']
 })
 export class Tab2Page {
-  productlist = [];
-  list = 0;
-  list2 = 0;
-  currentQty = 0;
+  products = []
 
-  constructor(private shoppingService: ShoppingService, private actionSheetCtrl: ActionSheetController, private navCtrl: NavController) {}
+  constructor(private ShoppingService: ShoppingService, private navCtrl: NavController) {}
 
-  ngOnInit() {
-    this.shoppingService.productlist.subscribe(productlist => {
-      this.productlist = productlist;
-    })
-
-
-
-    this.shoppingService.onThatProduct.subscribe(idx => {
-      this.list = this.shoppingService.productlist[idx].id;
+  ngOnInit(){
+    this.ShoppingService.products.subscribe(products => {
+      this.products = products.filter(p => {
+        return !p.inMyCart
+      })
     })
   }
 
-  onNavigateToProductList(id){
-    this.navCtrl.navigateForward("/product/" + id);
+  viewProduct(id){
+    this.navCtrl.navigateForward("/products/" + id)
+  }
+  
+  plus(e, id){
+    e.stopPropagation()
+    this.ShoppingService.addQuantity(parseInt(id))
   }
 
-  plus() {
-    this.currentQty++;
+  minus(e, id){
+    e.stopPropagation()
+    this.ShoppingService.minusQuantity(parseInt(id))
   }
 
-  minus(){
-    this.currentQty--;
+  addToCart(e, id){
+    e.stopPropagation()
+    this.ShoppingService.addToCart(parseInt(id))
   }
 
 }
